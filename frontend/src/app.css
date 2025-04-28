@@ -2,6 +2,106 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  color-scheme: dark;
+}
+
+html, body {
+  @apply bg-macos-bg text-macos-text;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#app {
+  @apply h-full flex flex-col;
+}
+
+/* macOS style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-macos-control rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-macos-control-hover;
+}
+
+/* macOS style inputs */
+input, textarea, select {
+  @apply bg-macos-card border border-macos-divider rounded-macos px-3 py-2 outline-none;
+}
+
+input:focus, textarea:focus, select:focus {
+  @apply border-macos-blue;
+}
+
+/* macOS style buttons */
+button {
+  @apply bg-macos-control text-macos-text rounded-full px-4 py-2 transition-all;
+}
+
+button:hover {
+  @apply bg-macos-control-hover;
+}
+
+button.primary {
+  @apply bg-macos-blue;
+}
+
+button.primary:hover {
+  @apply bg-opacity-90;
+}
+
+button.danger {
+  @apply bg-macos-red;
+}
+
+button.danger:hover {
+  @apply bg-opacity-90;
+}
+
+/* Glass cards */
+.glass-card {
+  @apply bg-macos-card backdrop-blur-glass rounded-macos border border-macos-divider shadow-macos;
+}
+
+.glass-card:hover {
+  @apply shadow-macos-hover;
+}
+
+/* macOS style transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
 /* Custom styles */
 html {
   scroll-behavior: smooth;

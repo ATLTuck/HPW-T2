@@ -1,78 +1,58 @@
 <script lang="ts">
-  import { Router, Link, Route } from "svelte-routing";
-  import Navbar from "./components/Navbar.svelte";
-  import Home from "./routes/Home.svelte";
-  import Demo from "./routes/Demo.svelte";
-  import Docs from "./routes/Docs.svelte";
-
-  export let url = "";
+  import { onMount } from 'svelte';
+  import Layout from './components/Layout.svelte';
+  import Dashboard from './routes/Dashboard.svelte';
+  import Contacts from './routes/Contacts.svelte';
+  import Projects from './routes/Projects.svelte';
+  import Tasks from './routes/Tasks.svelte';
+  
+  type RouteComponent = new (...args: any[]) => any;
+  
+  // Define routes
+  const routes: Record<string, RouteComponent> = {
+    '/': Dashboard,
+    '/contacts': Contacts,
+    '/projects': Projects,
+    '/tasks': Tasks,
+  };
+  
+  let currentPath = window.location.pathname;
+  let component = routes[currentPath] || routes['/'];
+  
+  // Set up navigation
+  window.addEventListener('popstate', () => {
+    currentPath = window.location.pathname;
+    component = routes[currentPath] || routes['/'];
+  });
+  
+  // Export navigate function for use in other components
+  export function navigate(path: string): void {
+    window.history.pushState({}, '', path);
+    currentPath = path;
+    component = routes[path] || routes['/'];
+  }
+  
+  onMount(() => {
+    // Add dark mode class to document
+    document.documentElement.classList.add('dark');
+    
+    // Remove the loading indicator if it exists
+    const loadingElement = document.querySelector('.app-loading');
+    if (loadingElement) {
+      loadingElement.remove();
+    }
+  });
 </script>
 
-<Router {url}>
-  <div class="min-h-screen bg-gray-100">
-    <Navbar />
-    
-    <main class="container mx-auto px-4 py-8">
-      <Route path="/" component={Home} />
-      <Route path="/demo" component={Demo} />
-      <Route path="/docs" component={Docs} />
-    </main>
-
-    <footer class="bg-gray-800 text-white py-8">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 class="text-lg font-semibold mb-4">About</h3>
-            <p class="text-gray-300">
-              High-Performance Web Application Seed - A production-ready starting point for building
-              scalable, real-time applications.
-            </p>
-          </div>
-          <div>
-            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul class="space-y-2">
-              <li>
-                <Link to="/" class="text-gray-300 hover:text-white">Home</Link>
-              </li>
-              <li>
-                <Link to="/demo" class="text-gray-300 hover:text-white">Demo</Link>
-              </li>
-              <li>
-                <Link to="/docs" class="text-gray-300 hover:text-white">Documentation</Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-lg font-semibold mb-4">Resources</h3>
-            <ul class="space-y-2">
-              <li>
-                <a href="https://github.com/yourusername/hpw-seed" class="text-gray-300 hover:text-white">
-                  GitHub Repository
-                </a>
-              </li>
-              <li>
-                <a href="/docs" class="text-gray-300 hover:text-white">API Documentation</a>
-              </li>
-              <li>
-                <a href="/docs/performance" class="text-gray-300 hover:text-white">
-                  Performance Guide
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-300">
-          <p>&copy; 2024 High-Performance Web Application Seed. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-  </div>
-</Router>
+<Layout segment={currentPath === '/' ? 'dashboard' : currentPath.substring(1)}>
+  <svelte:component this={component} />
+</Layout>
 
 <style>
   :global(body) {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-      sans-serif;
+    padding: 0;
+    background-color: #1e1e1e;
+    color: #ffffff;
   }
 </style> 

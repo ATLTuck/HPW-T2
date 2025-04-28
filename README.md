@@ -1,117 +1,82 @@
-# High-Performance Web Application Seed
+# Solopreneur CRM
 
-A production-ready seed repository for building performance-critical real-time web applications. This repository provides a solid foundation for creating scalable, low-latency applications with a focus on local-first architecture and minimal external dependencies.
+A personal CRM application for solopreneurs and freelancers, with a beautiful macOS Big Sur-inspired dark mode interface. This application is designed to be used locally, with no authentication required.
 
-## 🚀 Features
+## Features
 
-- **Real-Time Communication**: WebSocket-based bi-directional communication with SSE fallback
-- **High-Performance Backend**: Go-based server with async processing
-- **Optimized Frontend**: Svelte with compile-time optimizations
-- **Multiple Database Options**: SQLite, RocksDB, and DuckDB
-- **Edge Computing Ready**: Local edge node setup
-- **Security First**: mTLS, rate limiting, and circuit breakers
+- **Contact Management**: Store contacts with custom fields and tags
+- **Project Tracking**: Manage projects with status, deadlines, and linked contacts
+- **Task Management**: Create tasks with reminders and links to projects or contacts
+- **Calendar View**: View deadlines and appointments with drag-and-drop support
+- **Notes and Documents**: Attach rich notes or files to contacts and projects
+- **Search**: Fast keyword and filter-based search across all data
+- **Analytics**: Simple insights with completion rates and other metrics
+- **Invoicing**: Create and track invoices with automatic reminders
+- **Time Tracking**: Log and export time spent on projects and tasks
+- **Goals and Milestones**: Set and track long-term goals
 
-## 🏗 Architecture
+## Technical Implementation
 
-```
-.
-├── frontend/          # Svelte frontend application
-├── backend/          # Go backend server
-├── database/         # Database configurations and scripts
-├── demo/            # Interactive demo and documentation
-└── scripts/         # Setup and utility scripts
-```
+The application is built using:
 
-## 🛠 Prerequisites
+- **Frontend**: Svelte with TypeScript for a fast, reactive UI
+- **Styling**: TailwindCSS for responsive design with custom macOS Big Sur styling
+- **Database**: Dexie.js (IndexedDB wrapper) for fast, local-first storage
+- **Charts**: Chart.js for analytics visualizations
+- **Icons**: Lucide icons for a clean, consistent UI
 
-- Go 1.21 or later
-- Node.js 18 or later
-- SQLite 3
-- RocksDB
-- DuckDB
+## Design Principles
 
-## 🚀 Getting Started
+### Performance First
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/hpw-seed.git
-   cd hpw-seed
-   ```
+- Local-first data storage for instant access
+- Efficient data structures and lazy loading
+- Virtual lists for large datasets
+- Optimized rendering and caching
 
+### Emotional Design
+
+- Dark mode for a calm, focused environment
+- Satisfying micro-interactions and animations
+- Professional yet approachable interface
+- Visual feedback for completed tasks
+
+### macOS Big Sur Aesthetic
+
+- Deep blues and grays with colorful accents
+- Frosted glass effects for sidebars and modals
+- Rounded corners on cards and buttons
+- Minimalist design with subtle animations
+
+## Getting Started
+
+1. Clone the repository
 2. Install dependencies:
-   ```bash
-   # Backend dependencies
-   cd backend
-   go mod download
-
-   # Frontend dependencies
-   cd ../frontend
+   ```
+   cd frontend
    npm install
    ```
-
-3. Set up databases:
-   ```bash
-   cd ../database
-   ./setup.sh
+3. Start the development server:
    ```
-
-4. Start the development servers:
-   ```bash
-   # Terminal 1 - Backend
-   cd backend
-   go run main.go
-
-   # Terminal 2 - Frontend
-   cd frontend
    npm run dev
    ```
 
-## 📚 Documentation
+## Browser Support
 
-- [Architecture Guide](docs/architecture.md)
-- [Performance Optimization](docs/performance.md)
-- [Security Best Practices](docs/security.md)
-- [Database Configuration](docs/database.md)
+The application uses modern web technologies and is designed to work best in:
 
-## 🎯 Use Cases
+- Chrome/Edge 80+
+- Firefox 75+
+- Safari 13.1+
 
-This seed repository is ideal for building:
+## Future Enhancements
 
-- Real-time financial dashboards
-- Collaborative tools
-- Online gaming platforms
-- IoT dashboards
-- Streaming analytics platforms
+- Email integration
+- Calendar sync with external calendars
+- Export/import functionality
+- Advanced reporting
+- Mobile support
 
-## 🔧 Configuration
+## License
 
-The application can be configured through environment variables:
-
-```bash
-# Server Configuration
-SERVER_PORT=8080
-SERVER_HOST=localhost
-
-# Database Configuration
-DB_TYPE=sqlite  # or rocksdb, duckdb
-DB_PATH=./data
-
-# Security
-TLS_CERT_PATH=./certs/server.crt
-TLS_KEY_PATH=./certs/server.key
-```
-
-## 📊 Performance Benchmarks
-
-- WebSocket latency: < 1ms
-- Database query time: < 5ms
-- Initial page load: < 100ms
-- Concurrent connections: 10,000+
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+MIT License 
